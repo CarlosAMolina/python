@@ -40,21 +40,24 @@ class Log:
 
 
 def get_result_with_regex_match(text: str) -> Log:
+    return get_result_with_regex_function(text, re.match)
+
+def get_result_with_regex_function(text: str, function) -> Log:
     characters_checked = 0
     log_parts_index = [0]
-    re_result = re.match(r"(\d{1,3}[\.]){3}\d{1,3}", text)
+    re_result = function(r"(\d{1,3}[\.]){3}\d{1,3}", text)
     log_parts_index.append(re_result.end())
     characters_checked += re_result.end()
     characters_checked += 3
     log_parts_index.append(characters_checked)
-    re_result = re.match(
+    re_result = function(
         r".+\s\[",
         text[characters_checked:],
     )
     characters_checked += re_result.end()
     log_parts_index.append(characters_checked - 2)
     log_parts_index.append(characters_checked)
-    re_result = re.match(
+    re_result = function(
         r"\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2}\s\+\d{4}",
         text[characters_checked:],
     )
@@ -62,7 +65,7 @@ def get_result_with_regex_match(text: str) -> Log:
     log_parts_index.append(characters_checked)
     characters_checked += 3
     log_parts_index.append(characters_checked)
-    re_result = re.match(
+    re_result = function(
         r'\w.*"\s\d',
         text[characters_checked:],
     )
@@ -73,7 +76,7 @@ def get_result_with_regex_match(text: str) -> Log:
     log_parts_index.append(characters_checked)
     log_parts_index.append(characters_checked + 1)
     characters_checked += 1
-    re_result = re.match(
+    re_result = function(
         r"\d{1,3}",
         text[characters_checked:],
     )
@@ -81,7 +84,7 @@ def get_result_with_regex_match(text: str) -> Log:
     log_parts_index.append(characters_checked)
     characters_checked += 2
     log_parts_index.append(characters_checked)
-    re_result = re.match(
+    re_result = function(
         r'.*"\s',
         text[characters_checked:],
     )
