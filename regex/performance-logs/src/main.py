@@ -42,6 +42,11 @@ class Log:
 def get_result_with_regex_match(text: str) -> Log:
     return get_result_with_regex_function(text, re.match)
 
+
+def get_result_with_regex_search(text: str) -> Log:
+    return get_result_with_regex_function(text, re.search)
+
+
 def get_result_with_regex_function(text: str, function) -> Log:
     characters_checked = 0
     log_parts_index = [0]
@@ -85,69 +90,6 @@ def get_result_with_regex_function(text: str, function) -> Log:
     characters_checked += 2
     log_parts_index.append(characters_checked)
     re_result = function(
-        r'.*"\s',
-        text[characters_checked:],
-    )
-    characters_checked += re_result.end()
-    log_parts_index.append(characters_checked - 2)
-    characters_checked += 1
-    log_parts_index.append(characters_checked)
-    log_parts_index.append(len(text) - 1)
-    return Log(
-        remote_addr=text[log_parts_index[0] : log_parts_index[1]],
-        remote_user=text[log_parts_index[2] : log_parts_index[3]],
-        time_local=text[log_parts_index[4] : log_parts_index[5]],
-        request=text[log_parts_index[6] : log_parts_index[7]],
-        status=text[log_parts_index[8] : log_parts_index[9]],
-        body_bytes_sent=text[log_parts_index[10] : log_parts_index[11]],
-        http_referer=text[log_parts_index[12] : log_parts_index[13]],
-        http_user_agent=text[log_parts_index[14] : log_parts_index[15]],
-    )
-
-
-def get_result_with_regex_search(text: str) -> Log:
-    characters_checked = 0
-    log_parts_index = [0]
-    re_result = re.search(r"(\d{1,3}[\.]){3}\d{1,3}", text)
-    log_parts_index.append(re_result.end())
-    characters_checked += re_result.end()
-    characters_checked += 3
-    log_parts_index.append(characters_checked)
-    re_result = re.search(
-        r".+\s\[",
-        text[characters_checked:],
-    )
-    characters_checked += re_result.end()
-    log_parts_index.append(characters_checked - 2)
-    log_parts_index.append(characters_checked)
-    re_result = re.search(
-        r"\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2}\s\+\d{4}",
-        text[characters_checked:],
-    )
-    characters_checked += re_result.end()
-    log_parts_index.append(characters_checked)
-    characters_checked += 3
-    log_parts_index.append(characters_checked)
-    re_result = re.search(
-        r'\w.*"\s\d',
-        text[characters_checked:],
-    )
-    characters_checked += re_result.end() - 1
-    log_parts_index.append(characters_checked - 2)
-    log_parts_index.append(characters_checked)
-    characters_checked += 3
-    log_parts_index.append(characters_checked)
-    log_parts_index.append(characters_checked + 1)
-    characters_checked += 1
-    re_result = re.search(
-        r"\d{1,3}",
-        text[characters_checked:],
-    )
-    characters_checked += re_result.end()
-    log_parts_index.append(characters_checked)
-    characters_checked += 2
-    log_parts_index.append(characters_checked)
-    re_result = re.search(
         r'.*"\s',
         text[characters_checked:],
     )
