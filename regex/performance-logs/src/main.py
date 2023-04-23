@@ -82,7 +82,7 @@ def get_result_with_regex_function(text: str, function) -> Log:
     log_parts_index.append(characters_checked + 1)
     characters_checked += 1
     re_result = function(
-        r"\d{1,3}",
+        r"\d+",
         text[characters_checked:],
     )
     characters_checked += re_result.end()
