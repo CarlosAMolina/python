@@ -1,8 +1,8 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from src.classes import RunRaiseException
-from src.classes import CustomError
+from src.main import RunRaiseException
+from src.main import CustomError
 
 
 class TestMockException(TestCase):
@@ -14,7 +14,7 @@ class TestMockException(TestCase):
             is_catched = True
         self.assertTrue(is_catched)
 
-    @patch("src.classes.RunRaiseException.raise_file_exists_error")
+    @patch("src.main.RunRaiseException.raise_file_exists_error")
     def test_catch_mocked_exception(self, mock_raise_exception):
         is_catched = False
         mock_raise_exception.side_effect = ValueError
@@ -32,7 +32,7 @@ class TestMockException(TestCase):
             is_catched = True
         self.assertTrue(is_catched)
 
-    @patch("src.classes.RunRaiseException.raise_file_exists_error")
+    @patch("src.main.RunRaiseException.raise_file_exists_error")
     def test_catch_mocked_custom_exception(self, mock_raise_exception):
         is_catched = False
         mock_raise_exception.side_effect = CustomError
