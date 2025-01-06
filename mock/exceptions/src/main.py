@@ -1,9 +1,10 @@
 from src.exceptions import CustomError
 
 
-def run_cath_exception():
+def run_cath_exception() -> str:
     try:
         _RunRaiseException().raise_file_exists_error()
+        return "No exception :("
     except FileExistsError:
         return "Catched FileExistsError!"
     except ValueError:
@@ -12,7 +13,6 @@ def run_cath_exception():
         return "Catched CustomError!"
     except:
         return "No catched :("
-    return "No exception :("
 
 
 class _RunRaiseException:
