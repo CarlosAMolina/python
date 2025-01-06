@@ -3,22 +3,22 @@ from unittest.mock import patch
 
 from src.exceptions import CustomError
 from src.main import _RunRaiseException
-from src.main import run_cath_exception
+from src.main import run_catch_exception
 
 
-class Test_run_cath_exceptions(TestCase):
+class Test_run_catch_exceptions(TestCase):
     def test_exception_is_catched(self):
-        self.assertEqual("Catched FileExistsError!", run_cath_exception())
+        self.assertEqual("Catched FileExistsError!", run_catch_exception())
 
     @patch("src.main._RunRaiseException.raise_file_exists_error")
     def test_exception_is_catched_if_mocked(self, mock_raise_exception):
         mock_raise_exception.side_effect = ValueError
-        self.assertEqual("Catched ValueError!", run_cath_exception())
+        self.assertEqual("Catched ValueError!", run_catch_exception())
 
     @patch("src.main._RunRaiseException.raise_file_exists_error")
     def test_exception_is_catched_if_mocked_with_custom_error(self, mock_raise_exception):
         mock_raise_exception.side_effect = CustomError
-        self.assertEqual("Catched CustomError!", run_cath_exception())
+        self.assertEqual("Catched CustomError!", run_catch_exception())
 
 
 class Test_RunRaiseException(TestCase):

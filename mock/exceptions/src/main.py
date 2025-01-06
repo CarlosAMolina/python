@@ -1,7 +1,7 @@
 from src.exceptions import CustomError
 
 
-def run_cath_exception() -> str:
+def run_catch_exception() -> str:
     try:
         _RunRaiseException().raise_file_exists_error()
         return "No exception :("
