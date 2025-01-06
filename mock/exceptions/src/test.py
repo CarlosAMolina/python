@@ -31,3 +31,13 @@ class TestMockException(TestCase):
         except _CustomError:
             is_catched = True
         self.assertTrue(is_catched)
+
+    @patch("src.classes.RunRaiseException.raise_file_exists_error")
+    def test_catch_mocked_custom_exception(self, mock_raise_exception):
+        is_catched = False
+        mock_raise_exception.side_effect = _CustomError
+        try:
+            RunRaiseException().raise_file_exists_error()
+        except _CustomError:
+            is_catched = True
+        self.assertTrue(is_catched)
