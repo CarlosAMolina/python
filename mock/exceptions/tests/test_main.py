@@ -5,7 +5,7 @@ from src.main import _RunRaiseException
 from src.main import CustomError
 
 
-class TestMockException(TestCase):
+class Test_RunRaiseException(TestCase):
     def test_catch_method_exception(self):
         is_catched = False
         try:
