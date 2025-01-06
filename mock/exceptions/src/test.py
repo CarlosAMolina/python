@@ -2,6 +2,7 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from src.classes import RunRaiseException
+from src.classes import _CustomError
 
 
 class TestMockException(TestCase):
@@ -20,5 +21,13 @@ class TestMockException(TestCase):
         try:
             RunRaiseException().raise_file_exists_error()
         except ValueError:
+            is_catched = True
+        self.assertTrue(is_catched)
+
+    def test_catch_custom_exception(self):
+        is_catched = False
+        try:
+            RunRaiseException().raise_custom_error()
+        except _CustomError:
             is_catched = True
         self.assertTrue(is_catched)
