@@ -8,6 +8,8 @@ def run_cath_exception():
         return "Catched FileExistsError!"
     except ValueError:
         return "Catched ValueError!"
+    except CustomError:
+        return "Catched CustomError!"
     except:
         return "No catched :("
     return "No exception :("

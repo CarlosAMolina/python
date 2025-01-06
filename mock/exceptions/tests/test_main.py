@@ -15,6 +15,11 @@ class Test_run_cath_exceptions(TestCase):
         mock_raise_exception.side_effect = ValueError
         self.assertEqual("Catched ValueError!", run_cath_exception())
 
+    @patch("src.main._RunRaiseException.raise_file_exists_error")
+    def test_exception_is_catched_if_mocked_with_custom_error(self, mock_raise_exception):
+        mock_raise_exception.side_effect = CustomError
+        self.assertEqual("Catched CustomError!", run_cath_exception())
+
 
 class Test_RunRaiseException(TestCase):
     def test_catch_method_exception(self):
