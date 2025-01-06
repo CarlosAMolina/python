@@ -5,8 +5,12 @@ def run_cath_exception():
     try:
         _RunRaiseException().raise_file_exists_error()
     except FileExistsError:
-        return "Catched!"
-    return "No catched :("
+        return "Catched FileExistsError!"
+    except ValueError:
+        return "Catched ValueError!"
+    except:
+        return "No catched :("
+    return "No exception :("
 
 
 class _RunRaiseException:
