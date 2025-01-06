@@ -1,8 +1,13 @@
 from unittest import TestCase
 from unittest.mock import patch
 
+from src.exceptions import CustomError
 from src.main import _RunRaiseException
-from src.main import CustomError
+from src.main import run_cath_exception
+
+class Test_run_cath_exceptions(TestCase):
+    def test_exception_is_catched(self):
+        self.assertEqual("Catched!", run_cath_exception())
 
 
 class Test_RunRaiseException(TestCase):

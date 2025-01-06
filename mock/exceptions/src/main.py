@@ -1,13 +1,13 @@
 from src.exceptions import CustomError
 
 
-def run_cath_exceptions():
+def run_cath_exception():
     try:
         _RunRaiseException().raise_file_exists_error()
     except FileExistsError:
-        return "exception: FileExistsError"
-    except:
-        raise Exception("No exception was catched")
+        return "Catched!"
+    return "No catched :("
+
 
 class _RunRaiseException:
     def raise_file_exists_error(self):
