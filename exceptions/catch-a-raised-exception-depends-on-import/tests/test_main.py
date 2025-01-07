@@ -23,11 +23,9 @@ class TestCatchExceptions(unittest.TestCase):
 
     def _get_what_imports_can_catch_the_exception(self, exception_to_check) -> CatchResults:
         catch_results = CatchResults()
-        try:
-            raise exception_to_check
-        except FolderInS3UriError_main:
+        if self._is_exception_catched_by_exception(exception_to_check, FolderInS3UriError_main):
             catch_results.add_to_catched("FolderInS3UriError_main")
-        except:
+        else:
             catch_results.add_to_not_catched("FolderInS3UriError_main")
         try:
             raise exception_to_check
@@ -42,3 +40,11 @@ class TestCatchExceptions(unittest.TestCase):
         except:
             catch_results.add_to_not_catched("FolderInS3UriError_test")
         return catch_results
+
+    def _is_exception_catched_by_exception(self, exception_to_catch, exception_catcher):
+        try:
+            raise exception_to_catch
+        except exception_catcher:
+            return True
+        except:
+            return False
