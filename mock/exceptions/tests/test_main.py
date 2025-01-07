@@ -53,7 +53,7 @@ class TestRunRaiseException(TestCase):
         self.assertTrue(is_catched)
 
     @patch("src.main._RunRaiseException.run")
-    def test_catch_mocked_custom_exception(self, mock_raise_exception):
+    def test_catch_mocked_exception_with_custom_exception(self, mock_raise_exception):
         is_catched = False
         mock_raise_exception.side_effect = CustomError_exceptions
         try:
