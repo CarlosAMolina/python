@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from src.exceptions import CustomError as CustomError_exceptions
+from src.exceptions import CustomError as ExceptionsCustomError
 from src.main import _RunRaiseException
 from src.main import run_catch_exception
 
@@ -17,7 +17,7 @@ class Test_run_catch_exceptions(TestCase):
 
     @patch("src.main._RunRaiseException.run")
     def test_exception_is_catched_if_mocked_with_custom_error(self, mock_raise_exception):
-        mock_raise_exception.side_effect = CustomError_exceptions
+        mock_raise_exception.side_effect = ExceptionsCustomError
         self.assertEqual("Catched AbsoluteImportCustomError!", run_catch_exception())
 
 
@@ -43,9 +43,9 @@ class TestRunRaiseException(TestCase):
     @patch("src.main._RunRaiseException.run")
     def test_catch_mocked_exception_with_custom_exception(self, mock_raise_exception):
         is_catched = False
-        mock_raise_exception.side_effect = CustomError_exceptions
+        mock_raise_exception.side_effect = ExceptionsCustomError
         try:
             _RunRaiseException().run()
-        except CustomError_exceptions:
+        except ExceptionsCustomError:
             is_catched = True
         self.assertTrue(is_catched)
