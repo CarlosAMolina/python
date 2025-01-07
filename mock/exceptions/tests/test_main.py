@@ -6,10 +6,6 @@ from src.main import _RunRaiseException
 from src.main import run_catch_exception
 
 
-class CustomError_test(ZeroDivisionError):
-    pass
-
-
 class Test_run_catch_exceptions(TestCase):
     def test_exception_is_catched(self):
         self.assertEqual("Catched FileExistsError!", run_catch_exception())
