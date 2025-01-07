@@ -11,19 +11,35 @@ class FolderInS3UriError_test(FileExistsError):
 
 class TestCatchExceptions(unittest.TestCase):
     def test_what_imports_can_catch_exceptions(self):
-        catch_results = self._get_what_imports_can_catch_the_exception(FolderInS3UriError_main)
-        self.assertEqual({"FolderInS3UriError_main"}, catch_results.catched)
-        self.assertEqual({"FolderInS3UriError_exceptions", "FolderInS3UriError_test"}, catch_results.not_catched)
-        catch_results = self._get_what_imports_can_catch_the_exception(FolderInS3UriError_exceptions)
-        self.assertEqual({"FolderInS3UriError_exceptions"}, catch_results.catched)
-        self.assertEqual({"FolderInS3UriError_main", "FolderInS3UriError_test"}, catch_results.not_catched)
-        catch_results = self._get_what_imports_can_catch_the_exception(FolderInS3UriError_test)
-        self.assertEqual({"FolderInS3UriError_test"}, catch_results.catched)
-        self.assertEqual({"FolderInS3UriError_exceptions", "FolderInS3UriError_main"}, catch_results.not_catched)
+        for test_values in (
+            (
+                FolderInS3UriError_main,
+                {"FolderInS3UriError_main"},
+                {"FolderInS3UriError_exceptions", "FolderInS3UriError_test"},
+            ),
+            (
+                FolderInS3UriError_exceptions,
+                {"FolderInS3UriError_exceptions"},
+                {"FolderInS3UriError_main", "FolderInS3UriError_test"},
+            ),
+            (
+                FolderInS3UriError_test,
+                {"FolderInS3UriError_test"},
+                {"FolderInS3UriError_exceptions", "FolderInS3UriError_main"},
+            ),
+        ):
+            exception_to_check, expected_catched, expected_not_catched = test_values
+            catch_results = self._get_what_imports_can_catch_the_exception(exception_to_check)
+            self.assertEqual(expected_catched, catch_results.catched)
+            self.assertEqual(expected_not_catched, catch_results.not_catched)
 
     def _get_what_imports_can_catch_the_exception(self, exception_to_check) -> CatchResults:
         catch_results = CatchResults()
-        for exception_catcher_str in ("FolderInS3UriError_main", "FolderInS3UriError_exceptions", "FolderInS3UriError_test"):
+        for exception_catcher_str in (
+            "FolderInS3UriError_main",
+            "FolderInS3UriError_exceptions",
+            "FolderInS3UriError_test",
+        ):
             exception_catcher = eval(exception_catcher_str)
             if self._is_exception_catched_by_exception(exception_to_check, exception_catcher):
                 catch_results.add_to_catched(exception_catcher_str)
