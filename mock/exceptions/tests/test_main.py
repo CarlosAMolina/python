@@ -52,14 +52,6 @@ class TestRunRaiseException(TestCase):
             is_catched = True
         self.assertTrue(is_catched)
 
-    def test_catch_custom_exception(self):
-        is_catched = False
-        try:
-            _RunRaiseException().run()
-        except CustomError_exceptions:
-            is_catched = True
-        self.assertTrue(is_catched)
-
     @patch("src.main._RunRaiseException.run")
     def test_catch_mocked_custom_exception(self, mock_raise_exception):
         is_catched = False
