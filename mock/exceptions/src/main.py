@@ -3,7 +3,7 @@ from src.exceptions import CustomError
 
 def run_catch_exception() -> str:
     try:
-        _RunRaiseException().raise_file_exists_error()
+        _RunRaiseException().run()
         return "No exception :("
     except FileExistsError:
         return "Catched FileExistsError!"
@@ -16,5 +16,5 @@ def run_catch_exception() -> str:
 
 
 class _RunRaiseException:
-    def raise_file_exists_error(self):
+    def run(self):
         raise FileExistsError
