@@ -11,7 +11,7 @@ class _TestCustomError(FileExistsError):
 
 class TestCustomError(unittest.TestCase):
     def test_isinstance_has_expected_behaviour(self):
-        self.assertTrue(isinstance(ExceptionsCustomError(), MainAbsoluteImportCustomError))
+        self.assertTrue(isinstance(ExceptionsCustomError(), MainAbsoluteImportCustomError))  # Uses equal import.
         self.assertFalse(isinstance(ExceptionsCustomError(), MainRelativeImportCustomError))
         self.assertFalse(isinstance(_TestCustomError(), ExceptionsCustomError))
         self.assertFalse(isinstance(_TestCustomError(), MainAbsoluteImportCustomError))
