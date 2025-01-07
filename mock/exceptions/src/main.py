@@ -18,6 +18,3 @@ def run_catch_exception() -> str:
 class _RunRaiseException:
     def raise_file_exists_error(self):
         raise FileExistsError
-
-    def raise_custom_error(self):
-        raise CustomError
