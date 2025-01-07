@@ -1,8 +1,8 @@
 import unittest
 
-from src.exceptions import CustomError as CustomError_exceptions
-from src.main import CustomErrorAbsoluteImport as CustomError_absolute_main
-from src.main import CustomErrorRelativeImport as CustomError_relative_main
+from src.exceptions import CustomError as ExceptionsCustomError
+from src.main import AbsoluteImportCustomError as MainAbsoluteImportCustomError
+from src.main import RelativeImportCustomError as MainRelativeImportCustomError
 
 
 class CustomError_test(FileExistsError):
@@ -11,8 +11,8 @@ class CustomError_test(FileExistsError):
 
 class TestIsinstance(unittest.TestCase):
     def test_isinstance_has_excpected_behaviour(self):
-        assert id(CustomError_exceptions) == id(CustomError_absolute_main)
-        assert id(CustomError_exceptions) != id(CustomError_relative_main)
-        assert id(CustomError_exceptions()) == id(CustomError_absolute_main()) == id(CustomError_relative_main())
-        assert isinstance(CustomError_exceptions(), CustomError_absolute_main)
-        assert not isinstance(CustomError_exceptions(), CustomError_relative_main)
+        assert id(ExceptionsCustomError) == id(MainAbsoluteImportCustomError)
+        assert id(ExceptionsCustomError) != id(MainRelativeImportCustomError)
+        assert id(ExceptionsCustomError()) == id(MainAbsoluteImportCustomError()) == id(MainRelativeImportCustomError())
+        assert isinstance(ExceptionsCustomError(), MainAbsoluteImportCustomError)
+        assert not isinstance(ExceptionsCustomError(), MainRelativeImportCustomError)
