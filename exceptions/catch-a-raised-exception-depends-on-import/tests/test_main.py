@@ -2,11 +2,19 @@ import unittest
 
 from src.exceptions import FolderInS3UriError as FolderInS3UriError_exceptions
 from src.main import CatchResults
-from src.main import FolderInS3UriError_main
+from src.main import FolderInS3UriError as FolderInS3UriError_main
 
 
 class FolderInS3UriError_test(FileExistsError):
     pass
+
+
+class TestIsinstance(unittest.TestCase):
+    def test_isinstance_for_all_classes(self):
+        assert isinstance(FolderInS3UriError_exceptions(), FolderInS3UriError_exceptions)
+        assert not isinstance(FolderInS3UriError_exceptions(), FolderInS3UriError_main)
+        assert not isinstance(FolderInS3UriError_main(), FolderInS3UriError_exceptions)
+        assert not isinstance(FolderInS3UriError_test(), FolderInS3UriError_exceptions)
 
 
 class TestCatchExceptions(unittest.TestCase):

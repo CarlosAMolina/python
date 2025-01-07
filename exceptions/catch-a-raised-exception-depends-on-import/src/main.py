@@ -1,8 +1,8 @@
-from exceptions import FolderInS3UriError as FolderInS3UriError_main
+from exceptions import FolderInS3UriError
 
 
 def run():
-    print("Do some stuff with the exception: ", FolderInS3UriError_main)
+    print("Do some stuff with the exception: ", FolderInS3UriError)
 
 
 class CatchResults:
