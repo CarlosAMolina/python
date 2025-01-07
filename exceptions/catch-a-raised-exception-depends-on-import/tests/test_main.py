@@ -27,17 +27,13 @@ class TestCatchExceptions(unittest.TestCase):
             catch_results.add_to_catched("FolderInS3UriError_main")
         else:
             catch_results.add_to_not_catched("FolderInS3UriError_main")
-        try:
-            raise exception_to_check
-        except FolderInS3UriError_exceptions:
+        if self._is_exception_catched_by_exception(exception_to_check, FolderInS3UriError_exceptions):
             catch_results.add_to_catched("FolderInS3UriError_exceptions")
-        except:
+        else:
             catch_results.add_to_not_catched("FolderInS3UriError_exceptions")
-        try:
-            raise exception_to_check
-        except FolderInS3UriError_test:
+        if self._is_exception_catched_by_exception(exception_to_check, FolderInS3UriError_test):
             catch_results.add_to_catched("FolderInS3UriError_test")
-        except:
+        else:
             catch_results.add_to_not_catched("FolderInS3UriError_test")
         return catch_results
 
