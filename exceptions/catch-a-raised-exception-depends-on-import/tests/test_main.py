@@ -14,59 +14,59 @@ class TestCatchExceptions(unittest.TestCase):
         for test_values in (
             (
                 FolderInS3UriError_main,
-                {"FolderInS3UriError_main"},
-                {"FolderInS3UriError_exceptions", "FolderInS3UriError_test"},
+                {FolderInS3UriError_main},
+                {FolderInS3UriError_exceptions, FolderInS3UriError_test},
             ),
             (
                 FolderInS3UriError_exceptions,
-                {"FolderInS3UriError_exceptions"},
-                {"FolderInS3UriError_main", "FolderInS3UriError_test"},
+                {FolderInS3UriError_exceptions},
+                {FolderInS3UriError_main, FolderInS3UriError_test},
             ),
             (
                 FolderInS3UriError_test,
-                {"FolderInS3UriError_test"},
-                {"FolderInS3UriError_exceptions", "FolderInS3UriError_main"},
+                {FolderInS3UriError_test},
+                {FolderInS3UriError_exceptions, FolderInS3UriError_main},
             ),
         ):
             exception_to_check, expected_catched, expected_not_catched = test_values
-            exception_catcher_str_array = (
-                "FolderInS3UriError_main",
-                "FolderInS3UriError_exceptions",
-                "FolderInS3UriError_test",
+            exception_catcher_array = (
+                FolderInS3UriError_main,
+                FolderInS3UriError_exceptions,
+                FolderInS3UriError_test,
             )
             catch_results = self._get_what_imports_can_catch_the_exception(
-                exception_to_check, exception_catcher_str_array
+                exception_to_check, exception_catcher_array
             )
             self.assertEqual(expected_catched, catch_results.catched)
             self.assertEqual(expected_not_catched, catch_results.not_catched)
 
     def _get_what_imports_can_catch_the_exception(
-        self, exception_to_catch, exception_catcher_str_array
+        self, exception_to_catch, exception_catcher_array
     ) -> CatchResults:
         return ExceptionCatchersClassifier(
-            exception_catcher_str_array
+            exception_catcher_array
         ).get_cathers_classified_by_can_catch_the_exception(exception_to_catch)
 
 
 class ExceptionCatchersClassifier:
-    def __init__(self, exception_catcher_str_array: tuple[str, ...]):
-        self._exception_catcher_str_array = exception_catcher_str_array
+    def __init__(self, exception_catcher_array: tuple[Exception]):
+        self._exception_catcher_array = exception_catcher_array
 
     def get_cathers_classified_by_can_catch_the_exception(self, exception_to_catch) -> CatchResults:
         catch_results = CatchResults()
-        for exception_catcher_str in self._exception_catcher_str_array:
-            if ExceptionCatcherChecker(exception_catcher_str).can_catch_the_exception(exception_to_catch):
-                catch_results.add_to_catched(exception_catcher_str)
+        for exception_catcher in self._exception_catcher_array:
+            if ExceptionCatcherChecker(exception_catcher).can_catch_the_exception(exception_to_catch):
+                catch_results.add_to_catched(exception_catcher)
             else:
-                catch_results.add_to_not_catched(exception_catcher_str)
+                catch_results.add_to_not_catched(exception_catcher)
         return catch_results
 
 
 class ExceptionCatcherChecker:
-    def __init__(self, exception_catcher_str: str):
-        self._exception_catcher = eval(exception_catcher_str)
+    def __init__(self, exception_catcher: Exception):
+        self._exception_catcher = exception_catcher
 
-    def can_catch_the_exception(self, exception_to_catch):
+    def can_catch_the_exception(self, exception_to_catch: Exception):
         try:
             raise exception_to_catch
         except self._exception_catcher:
