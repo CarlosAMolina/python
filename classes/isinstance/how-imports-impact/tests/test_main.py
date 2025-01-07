@@ -9,10 +9,15 @@ class CustomError_test(FileExistsError):
     pass
 
 
-class TestIsinstance(unittest.TestCase):
+class TestCustomError(unittest.TestCase):
+    def test_id_has_expected_behaviour(self):
+        # Not instance.
+        self.assertEqual(id(ExceptionsCustomError), id(MainAbsoluteImportCustomError))
+        self.assertNotEqual(id(ExceptionsCustomError), id(MainRelativeImportCustomError))
+        # Instances.
+        self.assertEqual(id(ExceptionsCustomError()), id(MainAbsoluteImportCustomError()))
+        self.assertEqual(id(ExceptionsCustomError()), id(MainRelativeImportCustomError()))
+
     def test_isinstance_has_excpected_behaviour(self):
-        assert id(ExceptionsCustomError) == id(MainAbsoluteImportCustomError)
-        assert id(ExceptionsCustomError) != id(MainRelativeImportCustomError)
-        assert id(ExceptionsCustomError()) == id(MainAbsoluteImportCustomError()) == id(MainRelativeImportCustomError())
         assert isinstance(ExceptionsCustomError(), MainAbsoluteImportCustomError)
         assert not isinstance(ExceptionsCustomError(), MainRelativeImportCustomError)
