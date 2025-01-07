@@ -1,9 +1,8 @@
 import unittest
 
 from src.exceptions import FolderInS3UriError as FolderInS3UriError_exceptions
-
-from src.main import FolderInS3UriError as FolderInS3UriError_main
 from src.main import CatchResults
+from src.main import FolderInS3UriError_main
 
 
 class FolderInS3UriError_test(FileExistsError):

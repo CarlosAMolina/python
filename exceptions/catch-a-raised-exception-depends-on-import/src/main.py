@@ -1,7 +1,8 @@
-from exceptions import FolderInS3UriError
+from exceptions import FolderInS3UriError as FolderInS3UriError_main
+
 
 def run():
-    print("Do some stuff with the exception: ", FolderInS3UriError)
+    print("Do some stuff with the exception: ", FolderInS3UriError_main)
 
 
 class CatchResults:
@@ -10,8 +11,8 @@ class CatchResults:
         self._not_catched = set()
 
     def __repr__(self) -> str:
-        catched_summary = self._get_summary('catched', self._catched)
-        not_catched_summary = self._get_summary('not catched', self._not_catched)
+        catched_summary = self._get_summary("catched", self._catched)
+        not_catched_summary = self._get_summary("not catched", self._not_catched)
         return f"{catched_summary}\n{not_catched_summary}"
 
     def _get_summary(self, type_str: str, values: set) -> str:
