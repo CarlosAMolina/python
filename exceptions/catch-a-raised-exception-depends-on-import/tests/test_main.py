@@ -24,7 +24,7 @@ class TestCatchExceptions(unittest.TestCase):
         self.assertFalse(_can_exception_be_catched_by_catcher(ExceptionsCustomError, _TestCustomError))
 
 
-def _can_exception_be_catched_by_catcher(exception_to_catch: Exception, exception_catcher: Exception):
+def _can_exception_be_catched_by_catcher(exception_to_catch: type[Exception], exception_catcher: type[Exception]):
     """
     - What catch does (https://docs.python.org/3/tutorial/errors.html): A class in an except clause
     matches exceptions which are instances of the class itself or one of its derived classes.
