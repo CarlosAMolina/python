@@ -24,20 +24,23 @@ class TestCatchExceptions(unittest.TestCase):
     def _get_what_imports_can_catch_the_exception(self, exception_to_check) -> CatchResults:
         catch_results = CatchResults()
         exception_catcher = FolderInS3UriError_main
+        exception_catcher_str = "FolderInS3UriError_main"
         if self._is_exception_catched_by_exception(exception_to_check, exception_catcher):
-            catch_results.add_to_catched("FolderInS3UriError_main")
+            catch_results.add_to_catched(exception_catcher_str)
         else:
-            catch_results.add_to_not_catched("FolderInS3UriError_main")
+            catch_results.add_to_not_catched(exception_catcher_str)
         exception_catcher = FolderInS3UriError_exceptions
+        exception_catcher_str = "FolderInS3UriError_exceptions"
         if self._is_exception_catched_by_exception(exception_to_check, exception_catcher):
-            catch_results.add_to_catched("FolderInS3UriError_exceptions")
+            catch_results.add_to_catched(exception_catcher_str)
         else:
-            catch_results.add_to_not_catched("FolderInS3UriError_exceptions")
+            catch_results.add_to_not_catched(exception_catcher_str)
         exception_catcher = FolderInS3UriError_test
+        exception_catcher_str = "FolderInS3UriError_test"
         if self._is_exception_catched_by_exception(exception_to_check, exception_catcher):
-            catch_results.add_to_catched("FolderInS3UriError_test")
+            catch_results.add_to_catched(exception_catcher_str)
         else:
-            catch_results.add_to_not_catched("FolderInS3UriError_test")
+            catch_results.add_to_not_catched(exception_catcher_str)
         return catch_results
 
     def _is_exception_catched_by_exception(self, exception_to_catch, exception_catcher):
