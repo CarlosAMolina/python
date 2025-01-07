@@ -33,7 +33,7 @@ class Test_run_catch_exceptions(TestCase):
         self.assertEqual("Catched CustomError!", run_catch_exception())
 
 
-class Test_RunRaiseException(TestCase):
+class TestRunRaiseException(TestCase):
     def test_catch_method_exception(self):
         is_catched = False
         try:
@@ -43,7 +43,7 @@ class Test_RunRaiseException(TestCase):
         self.assertTrue(is_catched)
 
     @patch("src.main._RunRaiseException.run")
-    def test_catch_mocked_exception(self, mock_raise_exception):
+    def test_catch_mocked_exception_with_built_in_exception(self, mock_raise_exception):
         is_catched = False
         mock_raise_exception.side_effect = ValueError
         try:
