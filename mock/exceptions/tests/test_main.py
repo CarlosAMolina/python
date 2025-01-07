@@ -3,7 +3,19 @@ from unittest.mock import patch
 
 from src.exceptions import CustomError
 from src.main import _RunRaiseException
+from src.main import CustomError as CustomError_main
 from src.main import run_catch_exception
+
+
+class CustomError_test(ZeroDivisionError):
+    pass
+
+
+class TestIsinstance(TestCase):
+    def test_isinstance_for_all_classes(self):
+        assert isinstance(CustomError(), CustomError)
+        assert isinstance(CustomError_main(), CustomError)
+        assert not isinstance(CustomError_test(), CustomError)
 
 
 class Test_run_catch_exceptions(TestCase):
