@@ -1,6 +1,6 @@
-from src.exceptions import CustomError as AbsoluteImportCustomError
+from src.exceptions import CustomError as FromSrcImportCustomError
 
-from exceptions import CustomError as RelativeImportCustomError
+from exceptions import CustomError as FromExceptionsImportCustomError
 
 
 def run_catch_exception() -> str:
@@ -11,10 +11,10 @@ def run_catch_exception() -> str:
         return "Catched FileExistsError!"
     except ValueError:
         return "Catched ValueError!"
-    except RelativeImportCustomError:
-        return "Catched RelativeImportCustomError!"
-    except AbsoluteImportCustomError:
-        return "Catched AbsoluteImportCustomError!"
+    except FromExceptionsImportCustomError:
+        return "Catched FromExceptionsImportCustomError!"
+    except FromSrcImportCustomError:
+        return "Catched FromSrcImportCustomError!"
     except:
         return "No catched :("
 

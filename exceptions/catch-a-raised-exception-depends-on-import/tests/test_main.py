@@ -1,8 +1,8 @@
 import unittest
 
 from src.exceptions import CustomError as ExceptionsCustomError
-from src.main import AbsoluteImportCustomError as MainAbsoluteImportCustomError
-from src.main import RelativeImportCustomError as MainRelativeImportCustomError
+from src.main import FromSrcImportCustomError as MainFromSrcImportCustomError
+from src.main import FromExceptionsImportCustomError as MainFromExceptionsImportCustomError
 
 
 class _TestCustomError(FileExistsError):
@@ -12,15 +12,15 @@ class _TestCustomError(FileExistsError):
 class TestCatchExceptions(unittest.TestCase):
     def test_what_imports_can_catch_exceptions(self):
         # When the import is done in the same way in both files, the exception can be catched.
-        self.assertTrue(_can_exception_be_catched_by_catcher(MainAbsoluteImportCustomError, FileExistsError))
-        self.assertTrue(_can_exception_be_catched_by_catcher(MainAbsoluteImportCustomError, ExceptionsCustomError))
-        self.assertFalse(_can_exception_be_catched_by_catcher(MainAbsoluteImportCustomError, _TestCustomError))
-        self.assertTrue(_can_exception_be_catched_by_catcher(MainRelativeImportCustomError, FileExistsError))
-        self.assertFalse(_can_exception_be_catched_by_catcher(MainRelativeImportCustomError, ExceptionsCustomError))
-        self.assertFalse(_can_exception_be_catched_by_catcher(MainRelativeImportCustomError, _TestCustomError))
+        self.assertTrue(_can_exception_be_catched_by_catcher(MainFromSrcImportCustomError, FileExistsError))
+        self.assertTrue(_can_exception_be_catched_by_catcher(MainFromSrcImportCustomError, ExceptionsCustomError))
+        self.assertFalse(_can_exception_be_catched_by_catcher(MainFromSrcImportCustomError, _TestCustomError))
+        self.assertTrue(_can_exception_be_catched_by_catcher(MainFromExceptionsImportCustomError, FileExistsError))
+        self.assertFalse(_can_exception_be_catched_by_catcher(MainFromExceptionsImportCustomError, ExceptionsCustomError))
+        self.assertFalse(_can_exception_be_catched_by_catcher(MainFromExceptionsImportCustomError, _TestCustomError))
         self.assertTrue(_can_exception_be_catched_by_catcher(ExceptionsCustomError, FileExistsError))
-        self.assertTrue(_can_exception_be_catched_by_catcher(ExceptionsCustomError, MainAbsoluteImportCustomError))
-        self.assertFalse(_can_exception_be_catched_by_catcher(ExceptionsCustomError, MainRelativeImportCustomError))
+        self.assertTrue(_can_exception_be_catched_by_catcher(ExceptionsCustomError, MainFromSrcImportCustomError))
+        self.assertFalse(_can_exception_be_catched_by_catcher(ExceptionsCustomError, MainFromExceptionsImportCustomError))
         self.assertFalse(_can_exception_be_catched_by_catcher(ExceptionsCustomError, _TestCustomError))
 
 
