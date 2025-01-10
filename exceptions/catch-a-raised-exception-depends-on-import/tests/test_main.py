@@ -1,8 +1,8 @@
 import unittest
 
 from src.exceptions import CustomError as ExceptionsCustomError
-from src.main import FromSrcImportCustomError as MainFromSrcImportCustomError
 from src.main import FromExceptionsImportCustomError as MainFromExceptionsImportCustomError
+from src.main import FromSrcImportCustomError as MainFromSrcImportCustomError
 
 
 class _TestCustomError(FileExistsError):
@@ -16,11 +16,15 @@ class TestCatchExceptions(unittest.TestCase):
         self.assertTrue(_can_exception_be_catched_by_catcher(MainFromSrcImportCustomError, ExceptionsCustomError))
         self.assertFalse(_can_exception_be_catched_by_catcher(MainFromSrcImportCustomError, _TestCustomError))
         self.assertTrue(_can_exception_be_catched_by_catcher(MainFromExceptionsImportCustomError, FileExistsError))
-        self.assertFalse(_can_exception_be_catched_by_catcher(MainFromExceptionsImportCustomError, ExceptionsCustomError))
+        self.assertFalse(
+            _can_exception_be_catched_by_catcher(MainFromExceptionsImportCustomError, ExceptionsCustomError)
+        )
         self.assertFalse(_can_exception_be_catched_by_catcher(MainFromExceptionsImportCustomError, _TestCustomError))
         self.assertTrue(_can_exception_be_catched_by_catcher(ExceptionsCustomError, FileExistsError))
         self.assertTrue(_can_exception_be_catched_by_catcher(ExceptionsCustomError, MainFromSrcImportCustomError))
-        self.assertFalse(_can_exception_be_catched_by_catcher(ExceptionsCustomError, MainFromExceptionsImportCustomError))
+        self.assertFalse(
+            _can_exception_be_catched_by_catcher(ExceptionsCustomError, MainFromExceptionsImportCustomError)
+        )
         self.assertFalse(_can_exception_be_catched_by_catcher(ExceptionsCustomError, _TestCustomError))
 
 
@@ -28,6 +32,7 @@ def _can_exception_be_catched_by_catcher(exception_to_catch: type[Exception], ex
     """
     - What catch does (https://docs.python.org/3/tutorial/errors.html): A class in an except clause
     matches exceptions which are instances of the class itself or one of its derived classes.
+    (More examples in the `isinstance` folder.
     """
     try:
         raise exception_to_catch
