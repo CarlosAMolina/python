@@ -32,7 +32,7 @@ def _can_exception_be_catched_by_catcher(exception_to_catch: type[Exception], ex
     """
     - What catch does (https://docs.python.org/3/tutorial/errors.html): A class in an except clause
     matches exceptions which are instances of the class itself or one of its derived classes.
-    (More examples in the `isinstance` folder.
+    (More examples in the `isinstance` folder).
     """
     try:
         raise exception_to_catch
