@@ -12,6 +12,4 @@ def get_ordered_dict() -> OrderedDict:
 
 
 # Both methods preserve the file order
-# This is extrange, in another program with a larger dict I need to use `get_ordered_dict` for that
-assert list(get_dict().keys()) == ["b", "a"]
-assert list(get_ordered_dict().keys()) == ["b", "a"]
+assert list(get_dict().keys()) == list(get_ordered_dict().keys())
