@@ -2,8 +2,9 @@
 
 import tempfile
 
-with tempfile.TemporaryDirectory() as tmpdirname:
-    print('created temporary directory', tmpdirname)
+with tempfile.TemporaryDirectory() as tmp_dir_path_name:
+    assert isinstance(tmp_dir_path_name, str)
+    print('created temporary directory', tmp_dir_path_name)
 
 with tempfile.NamedTemporaryFile() as fp:
     fp.write(b'Hello world!')
